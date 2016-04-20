@@ -7,9 +7,8 @@
 #include "ImageIO.h"
 #include <opencv2/highgui/highgui.hpp>
 //#include <direct.h>
-#include <stdexcept>
-#include <stdlib.h>
 #include <iostream>
+#include <sys/stat.h>
 #include "HereBeDragons.h"
 
 using namespace cv;
@@ -22,18 +21,16 @@ void mkdirs(std::string path){
 	if (!ImageIO::isInDebugMode) {
 		return;
 	}
-	int index = 0;
+	unsigned long index = 0;
 	while ((index = path.find_first_of("\\/", index + 1)) != -1){
 #ifdef __WIN32
 		_mkdir(path.substr(0, index).c_str());
-#else
-		mkdirs(path.substr(0, index).c_str());
-#endif
 	}
-#ifdef __WIN32
 	_mkdir(path.c_str());
 #else
-	mkdirs(path.c_str());
+		mkdir(path.substr(0, index).c_str(), 0777);
+	}
+	mkdir(path.c_str(), 0777);
 #endif
 }
 
@@ -44,7 +41,11 @@ std::string ImageIO::getDebugFileName(std::string file){
 		return "";
 	}
 	std::string fullPath = ImageIO::debugFolder;
+#ifdef __WIN32
 	fullPath.append("\\");
+#else
+	fullPath.append("/");
+#endif
 	fullPath.append(file);
 	int index = fullPath.find_last_of("\\/");
 	if (index != -1){
