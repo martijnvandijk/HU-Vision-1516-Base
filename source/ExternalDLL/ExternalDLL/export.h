@@ -17,23 +17,22 @@
 
 
 
+extern "C" __declspec(dllexport) DLLExecution * getDLLExecutionTask(RGBImage * image);
+extern "C" __declspec(dllexport) void freeDLLExecutionTask(DLLExecution * dllExecution);
 
-extern "C" _declspec(dllexport) DLLExecution * getDLLExecutionTask(RGBImage * image);
-extern "C" _declspec(dllexport) void freeDLLExecutionTask(DLLExecution * dllExecution);
-
-extern "C" _declspec(dllexport) void setImageImplementation(bool student);
-
-
-extern "C" _declspec(dllexport) bool executePreProcessingStep1(DLLExecution * dllExecution, bool student);
-extern "C" _declspec(dllexport) bool executePreProcessingStep2(DLLExecution * dllExecution, bool student);
-extern "C" _declspec(dllexport) bool executePreProcessingStep3(DLLExecution * dllExecution, bool student);
-extern "C" _declspec(dllexport) bool executePreProcessingStep4(DLLExecution * dllExecution, bool student);
+extern "C" __declspec(dllexport) void setImageImplementation(bool student);
 
 
-extern "C" _declspec(dllexport) RGBImage * getResultPreProcessingStep1(DLLExecution * dllExecution);
-extern "C" _declspec(dllexport) RGBImage * getResultPreProcessingStep2(DLLExecution * dllExecution);
-extern "C" _declspec(dllexport) RGBImage * getResultPreProcessingStep3(DLLExecution * dllExecution);
-extern "C" _declspec(dllexport) RGBImage * getResultPreProcessingStep4(DLLExecution * dllExecution);
+extern "C" __declspec(dllexport) bool executePreProcessingStep1(DLLExecution * dllExecution, bool student);
+extern "C" __declspec(dllexport) bool executePreProcessingStep2(DLLExecution * dllExecution, bool student);
+extern "C" __declspec(dllexport) bool executePreProcessingStep3(DLLExecution * dllExecution, bool student);
+extern "C" __declspec(dllexport) bool executePreProcessingStep4(DLLExecution * dllExecution, bool student);
+
+
+extern "C" __declspec(dllexport) RGBImage * getResultPreProcessingStep1(DLLExecution * dllExecution);
+extern "C" __declspec(dllexport) RGBImage * getResultPreProcessingStep2(DLLExecution * dllExecution);
+extern "C" __declspec(dllexport) RGBImage * getResultPreProcessingStep3(DLLExecution * dllExecution);
+extern "C" __declspec(dllexport) RGBImage * getResultPreProcessingStep4(DLLExecution * dllExecution);
 
 
 

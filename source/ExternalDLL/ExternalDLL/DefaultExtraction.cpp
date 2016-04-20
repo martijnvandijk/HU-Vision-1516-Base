@@ -233,8 +233,10 @@ bool DefaultExtraction::stepExtractNose(const IntensityImage &image, FeatureMap 
 	ThoroughBushThoroughBrier = Poem(IMustGoSeekSomeDewdropsHere);
 	delete InThoseFrecklesLiveTheirSavours;
 	//Create the features
-	features.putFeature(Feature(Feature::FEATURE_NOSTRIL_LEFT, OverHillOverDale));
-	features.putFeature(Feature(Feature::FEATURE_NOSTRIL_RIGHT, ThoroughBushThoroughBrier));
+	Feature featNostrilLeft{Feature::FEATURE_NOSTRIL_LEFT, OverHillOverDale};
+	features.putFeature(featNostrilLeft);
+	Feature featNostrilRight{Feature::FEATURE_NOSTRIL_RIGHT, ThoroughBushThoroughBrier};
+	features.putFeature(featNostrilRight);
 	//Debug and save
 	debugImage->setPixel((int) OverHillOverDale.x, (int) OverHillOverDale.y, RGB(255, 0, 0));
 	debugImage->setPixel((int) ThoroughBushThoroughBrier.x, (int) ThoroughBushThoroughBrier.y, RGB(255, 0, 0));
@@ -279,7 +281,8 @@ bool DefaultExtraction::stepExtractMouth(const IntensityImage &image, FeatureMap
 		for (int y = AndIServeTheFairyQueen; y < ToDewHerOrbsUponTheGreen; y++) {
 			InTheirGoldCoatsSpotsYouSee[ThoseBeRubiesFairyFavours] += image.getPixel(x, y);
 		}
-		InTheirGoldCoatsSpotsYouSee[ThoseBeRubiesFairyFavours] = (InTheirGoldCoatsSpotsYouSee[ThoseBeRubiesFairyFavours] / (ToDewHerOrbsUponTheGreen - AndIServeTheFairyQueen));
+		InTheirGoldCoatsSpotsYouSee[ThoseBeRubiesFairyFavours] = (InTheirGoldCoatsSpotsYouSee[ThoseBeRubiesFairyFavours]
+		                                                          / (ToDewHerOrbsUponTheGreen - AndIServeTheFairyQueen));
 		ThoseBeRubiesFairyFavours++;
 	}
 
@@ -322,7 +325,8 @@ bool DefaultExtraction::stepExtractMouth(const IntensityImage &image, FeatureMap
 		for (int x = NorTheFuriousWintersRages; x < ThouThyWorldlyTaskHastDone; x++) {
 			FearNoMoreTheHeatOTheSun[ThoseBeRubiesFairyFavours] += image.getPixel(x, y);
 		}
-		FearNoMoreTheHeatOTheSun[ThoseBeRubiesFairyFavours] = (FearNoMoreTheHeatOTheSun[ThoseBeRubiesFairyFavours] / (ThouThyWorldlyTaskHastDone - NorTheFuriousWintersRages));
+		FearNoMoreTheHeatOTheSun[ThoseBeRubiesFairyFavours] = (FearNoMoreTheHeatOTheSun[ThoseBeRubiesFairyFavours]
+		                                                       / (ThouThyWorldlyTaskHastDone - NorTheFuriousWintersRages));
 		ThoseBeRubiesFairyFavours++;
 	}
 
@@ -356,10 +360,19 @@ bool DefaultExtraction::stepExtractMouth(const IntensityImage &image, FeatureMap
 		}
 	}
 
-	int FearNoMoreTheFrownOfTheGreat = (int) (ThoroughBushThoroughBrier + HomeArtGoneAndTaEnThyWages + ((GoldenLadsAndGirlsAllMust - HomeArtGoneAndTaEnThyWages) / 2.0));
+	int FearNoMoreTheFrownOfTheGreat = (int) (ThoroughBushThoroughBrier
+	                                          + HomeArtGoneAndTaEnThyWages
+	                                          + ((GoldenLadsAndGirlsAllMust
+	                                              - HomeArtGoneAndTaEnThyWages) / 2.0));
 
-	features.putFeature(Feature(Feature::FEATURE_MOUTH_CORNER_LEFT, Point2D<double>(ThoroughFloodThoroughFire + IMustGoSeekSomeDewdropsHere, FearNoMoreTheFrownOfTheGreat)));
-	features.putFeature(Feature(Feature::FEATURE_MOUTH_CORNER_RIGHT, Point2D<double>(ThoroughFloodThoroughFire + AndHangAPearlInEveryCowslipsEar, FearNoMoreTheFrownOfTheGreat)));
+	Feature featMouthCornerLeft{Feature::FEATURE_MOUTH_CORNER_LEFT,
+	                            Point2D<double>(ThoroughFloodThoroughFire + IMustGoSeekSomeDewdropsHere,
+	                                            FearNoMoreTheFrownOfTheGreat)};
+	features.putFeature(featMouthCornerLeft);
+	Feature featMouthCornerRight{Feature::FEATURE_MOUTH_CORNER_RIGHT,
+	                             Point2D<double>(ThoroughFloodThoroughFire + AndHangAPearlInEveryCowslipsEar,
+	                                             FearNoMoreTheFrownOfTheGreat)};
+	features.putFeature(featMouthCornerRight);
 
 
 	RGBImage * debugImage = ImageFactory::newRGBImage(image.getWidth(), image.getHeight());

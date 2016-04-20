@@ -83,10 +83,10 @@ RGBImage * ImageFactory::newRGBImage(const RGBImage &other) {
 }
 
 
-
-ImageFactory::Implementation &ImageFactory::DEFAULT = ImageFactory::ImplementationPrivate();
-ImageFactory::Implementation &ImageFactory::STUDENT = ImageFactory::ImplementationStudent();
-
+ImageFactory::ImplementationPrivate def = ImageFactory::ImplementationPrivate{};
+ImageFactory::Implementation &ImageFactory::DEFAULT = def;
+ImageFactory::ImplementationStudent stud = ImageFactory::ImplementationStudent{};
+ImageFactory::Implementation &ImageFactory::STUDENT = stud;
 
 
 ImageFactory::Implementation * ImageFactory::implementation = NULL;
