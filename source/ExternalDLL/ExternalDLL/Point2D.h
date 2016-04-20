@@ -201,8 +201,8 @@ template<typename T> struct Point2D {
 		return *this;
 	}
 
-	template<class T>
-	friend std::ostream& operator<<(std::ostream& out, Point2D<T> &other);
+	template<class F>
+	friend std::ostream& operator<<(std::ostream& out, Point2D<F> &other);
 };
 
 template<typename T>

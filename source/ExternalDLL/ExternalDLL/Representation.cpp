@@ -86,11 +86,11 @@ bool Representation::calculateRepresentation(FeatureMap &features, double(&facia
 	double NC = getLength(N, C);
 
 
-	double θl = getAngle(E, Point2D<double>(chinContours[0].x, E.y), chinContours[0]);
-	double θy = getAngle(F, Point2D<double>(chinContours[chinContours.size() - 1].x, F.y), chinContours[chinContours.size() - 1]);
+	double thetal = getAngle(E, Point2D<double>(chinContours[0].x, E.y), chinContours[0]);
+	double thetay = getAngle(F, Point2D<double>(chinContours[chinContours.size() - 1].x, F.y), chinContours[chinContours.size() - 1]);
 
-	double α = getAngle(features.getFeature(Feature::FEATURE_NOSE_END_LEFT)[0], features.getFeature(Feature::FEATURE_NOSE_END_RIGHT)[0], X);
-	double β = getAngle(chinContours[0], chinContours[chinContours.size() - 1], C);
+	double alpha = getAngle(features.getFeature(Feature::FEATURE_NOSE_END_LEFT)[0], features.getFeature(Feature::FEATURE_NOSE_END_RIGHT)[0], X);
+	double beta = getAngle(chinContours[0], chinContours[chinContours.size() - 1], C);
 
 	double a = getLength(features.getFeature(Feature::FEATURE_NOSTRIL_LEFT)[0], features.getFeature(Feature::FEATURE_NOSTRIL_RIGHT)[0]);
 	double b = getLength(features.getFeature(Feature::FEATURE_MOUTH_CORNER_LEFT)[0], features.getFeature(Feature::FEATURE_MOUTH_CORNER_RIGHT)[0]);
@@ -99,10 +99,10 @@ bool Representation::calculateRepresentation(FeatureMap &features, double(&facia
 	double XN = getLength(X, N);
 	double XC = getLength(X, C);
 
-	double hl = std::abs(eyeLeft[0].x - eyeLeft[1].x);
-	double hy = std::abs(eyeRight[0].x - eyeRight[1].x);
-	double vl = std::abs(eyeLeft[0].y - eyeLeft[1].y);
-	double vy = std::abs(eyeRight[0].y - eyeRight[1].y);
+	double hl = fabs(eyeLeft[0].x - eyeLeft[1].x);
+	double hy = fabs(eyeRight[0].x - eyeRight[1].x);
+	double vl = fabs(eyeLeft[0].y - eyeLeft[1].y);
+	double vy = fabs(eyeRight[0].y - eyeRight[1].y);
 
 
 	facialParameters[0] = AB / OC; //Is relative, because divide
@@ -110,9 +110,9 @@ bool Representation::calculateRepresentation(FeatureMap &features, double(&facia
 	facialParameters[2] = NC / OC; //Is relative, because divide
 	facialParameters[3] = 0.0; //????????
 	facialParameters[4] = chinContourArea;  //Is relative, because devide (see function)
-	facialParameters[5] = α; //Is relative, because angle
-	facialParameters[6] = (θl + θy) / 2.0; //Is relative, because angle
-	facialParameters[7] = β; //Is relative, because angle
+	facialParameters[5] = alpha; //Is relative, because angle
+	facialParameters[6] = (thetal + thetay) / 2.0; //Is relative, because angle
+	facialParameters[7] = beta; //Is relative, because angle
 	facialParameters[8] = XN / XC; //Is relative, because divide
 	facialParameters[9] = NM / XC; //Is relative, because divide
 	facialParameters[10] = (hl + hy) / ST; //Is relative, because divide
@@ -169,7 +169,7 @@ double Representation::getChinCountourArea(FeatureMap &features) {
 }
 
 double Representation::getVectorAngle(Point2D<double> one, Point2D<double> two) {
-	return std::acos((one.x * two.x) + (one.y * two.y));
+	return acos((one.x * two.x) + (one.y * two.y));
 }
 
 double Representation::getAngle(Point2D<double> one, Point2D<double> two, Point2D<double> orgin) {
@@ -179,7 +179,7 @@ double Representation::getAngle(Point2D<double> one, Point2D<double> two, Point2
 }
 
 double Representation::getVectorLenght(Point2D<double> vector) {
-	return std::sqrt(std::pow(vector.x, 2) + std::pow(vector.y, 2));
+	return sqrt(pow(vector.x, 2) + pow(vector.y, 2));
 }
 
 Point2D<double> Representation::getNormalizeVector(Point2D<double> vector) {
@@ -199,7 +199,7 @@ double Representation::getAreaOfTriangle(Point2D<double> A, Point2D<double> B, P
 	double s = (a + b + c) / 2.0;
 
 	//Area
-	return std::sqrt(s * (s - a) * (s - b) * (s - c));
+	return sqrt(s * (s - a) * (s - b) * (s - c));
 }
 
 Point2D<double> Representation::getCenter(Point2D<double> start, Point2D<double> end) {
@@ -207,5 +207,5 @@ Point2D<double> Representation::getCenter(Point2D<double> start, Point2D<double>
 }
 
 double Representation::getLength(Point2D<double> start, Point2D<double> end) {
-	return std::sqrt( std::pow((start.x - end.x), 2) + std::pow(start.y - end.y, 2) );
+	return sqrt( pow((start.x - end.x), 2) + pow(start.y - end.y, 2) );
 }

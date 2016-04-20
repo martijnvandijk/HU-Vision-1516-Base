@@ -6,7 +6,7 @@
 
 #include "ImageIO.h"
 #include <opencv2/highgui/highgui.hpp>
-#include <direct.h>
+//#include <direct.h>
 #include <stdexcept>
 #include <stdlib.h>
 #include <iostream>
@@ -24,9 +24,17 @@ void mkdirs(std::string path){
 	}
 	int index = 0;
 	while ((index = path.find_first_of("\\/", index + 1)) != -1){
+#ifdef __WIN32
 		_mkdir(path.substr(0, index).c_str());
+#else
+		mkdirs(path.substr(0, index).c_str());
+#endif
 	}
+#ifdef __WIN32
 	_mkdir(path.c_str());
+#else
+	mkdirs(path.c_str());
+#endif
 }
 
 std::string ImageIO::getDebugFileName(std::string file){
