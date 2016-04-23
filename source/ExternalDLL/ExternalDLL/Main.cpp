@@ -16,7 +16,11 @@ bool executeSteps(DLLExecution * executor);
 int main(int argc, char * argv[]) {
 	if (argc < 2) {
 		std::cerr << "usage: " << basename(argv[0]) << " <filename>" << std::endl;
+#ifdef __WIN32
+		return 0;
+#else
 		return 1;
+#endif
 	}
 
 
@@ -29,12 +33,15 @@ int main(int argc, char * argv[]) {
 
 
 
-
 	RGBImage * input = ImageFactory::newRGBImage();
 	if (!ImageIO::loadImage(argv[1], *input)) {
-		std::cout << "Image could not be loaded!" << std::endl;
+		std::cout << "Image " << argv[1] << " could not be loaded!" << std::endl;
+#ifdef __WIN32
 		system("pause");
 		return 0;
+#else
+		return 1;
+#endif
 	}
 
 
@@ -52,8 +59,14 @@ int main(int argc, char * argv[]) {
 	}
 
 	delete executor;
+
+#ifdef __WIN32
 	system("pause");
 	return 1;
+#else
+	std::cout.flush();
+	return 0;
+#endif
 }
 
 
